@@ -1,75 +1,65 @@
-[![Review Assignment Due Date](https://classroom.github.com/assets/deadline-readme-button-24ddc0f5d75046c5622901739e7c5dd533143b0c8e959d652212380cedb1ea36.svg)](https://classroom.github.com/a/dupzxMeo)
-[![Open in Visual Studio Code](https://classroom.github.com/assets/open-in-vscode-718a45dd9cf7e7f842a935f5ebbe5719a5e09af4491e668f4dbf3b35d5cca122.svg)](https://classroom.github.com/online_ide?assignment_repo_id=12479879&assignment_repo_type=AssignmentRepo)
-### CSCI 340 - Data Structures and Algorithm Analysis
+# BinaryTree Program
 
 **Data Structure:**  Binary Tree <BR>
 **Programming Focus:** C++ class development
 
-# Binary Tree Class
+## Overview
 
-For this computer assignment, you are to write a C++ program to implement a class for binary trees. To deal with variety of data types, implement this class as a template. The definition of the class for a binary tree (as a template) is given as follows:
+Welcome to the BinaryTree Program! This C++ program implements a binary tree using the provided `node.h` file. The program simulates a binary tree structure in the driver program found in the `binarytree.cc` file. This project is part of the Fall 2023 CSCI 340 - PE1 Data Struct Algorithm Analysis course, and it was completed by Jose Barron.
 
-```c++
-template <typename T> class BinaryTree{
+## Features
 
-public:
-    BinaryTree();                                      // default constructor
-    unsigned     getSize() const;                      // returns size of tree
-    unsigned     getHeight() const;                    // returns height of tree
-    virtual void Insert(const T&);                     // inserts node in tree
-    void         Inorder(void (*)(const T&));          // inorder traversal of tree
+- **Binary Tree Implementation:**
+  - Creates a binary tree using the provided `node.h` file.
+  - Supports insertion of nodes into the tree.
 
-protected:
-    Node<T> *root;                                      // root of tree
+- **Size and Height Calculation:**
+  - Provides functions to calculate the size and height of the binary tree.
 
-private:
-    unsigned _getSize(Node<T> *) const;                 // private version of getSize()
-    unsigned _getHeight(Node<T> *) const;               // private version of getHeight()
-    void     _Insert(Node<T> *&, const T&);             // private version of Insert()
-    void     _Inorder(Node<T> *, void (*)(const T&));   // private version of Inorder()
-};
-```
+- **Inorder Traversal:**
+  - Performs an inorder traversal of the binary tree, printing the data values of each node.
 
-Most of the *public* member functions of the `BinaryTree` class call *private* member functions of the class (with the same name). These *private* member functions can be implemented as either `recursive` or *non-recursive*, but clearly, *recursive* versions of these functions are preferable because of their short and simple implementations in code. However, they require more memory and usually slower than their *non-recursive* versions in execution, especially for a large amount of input data.
+## Test Runs
 
-Because of information hiding, a client is not permitted to access the binary tree directly, so the *root* of the tree is kept protected (not *private* because of future implementations of derived classes from the base class of the `BinaryTree`), so it cannot be passed as an argument to any of the *public* functions of the tree. It is essential to have *private* utility functions, which act as interface between a client and the tree. The `Insert()` function of the `BinaryTree` class is described as follows:
+The program has been tested with various scenarios to ensure its correct functionality and performance. The test cases include different sizes of vectors containing random integers and floats.
 
-- `Insert(const T &x)` This *virtual* function can be used to insert a node with the data value `x` in a binary tree, applying the following technique: if the tree is empty, then the new node will be the root of the tree with the value `x`; otherwise, the left or the right subtree is **randomly** selected and the value `x` is inserted in that side. To implement the random selection, you can use the following `RNG`.
+1. **Integer Binary Tree:**
+   - Creates a binary tree with random integers.
+   - Displays the size and height of the tree.
+   - Prints the data values of nodes in inorder traversal.
 
-```c++
-typedef enum {left_side, right_side } SIDE;
+2. **Float Binary Tree:**
+   - Creates a binary tree with random floating-point numbers.
+   - Displays the size and height of the tree.
+   - Prints the data values of nodes in inorder traversal.
 
-SIDE rnd(){ 
-    return rand()%2 ? right_side : left_side;
-}// End of rnd()
-```
+## Code Organization
 
-Put the implementation of your `BinaryTree` class in the header file **btree.h**. Definition of the class `Node`, which represents the nodes in a binary tree, can be found in the header file **node.h**. To use the class `Node` in your program, include the header file **node.h**, inserting `#include "node.h"` at the top of your header file.
+All the code for this project is located in the accompanying files:
 
-The source file **binarytree.cc** contains the driver program. In addition to the `main()` routine, it has the implementations of the following routines (as templates) and the definitions of the two RNGs used in the `main()` routine.
+- `btree.h`: Header file defining the `BinaryTree` class and its member functions.
+- `node.h` (given): Header file defining the `Node` class used in the binary tree.
+- `binarytree.cc` (given): Main program file where the binary tree is created and tested.
 
-- `template<class T> void print(const T &x):`
-- `template<class T> void printValues(BinaryTree<T> &tree, const string &name);`
+## Skills Showcase
 
-The unary function `print()` can be used as an argument to the member functions `Inorder()` to print the value of its argument `x`. The function `printValues()` does the followings:
+This project demonstrates proficiency in several key areas:
 
-- it prints name, which is the name of the tree, and it also prints the height of the tree.
-- it calls the member function `Inorder()` to print the data values in the tree in *inorder*.
+- **C++ Programming:**
+  - Utilizes C++ language features, including templates and classes, to implement a binary tree data structure.
 
-The class `RND1` can be used to generate random integers in the range [LOW1 = –999, HIGH1 = 999] and the class `RND2` can be used to generate random floating-point numbers in the range [LOW2 = –999.99, HIGH2 = 999.99]. The function objects `RND1()` and `RND2()`, generated from these classes, are used to fill in the random values in *vector* containers `vector<int> A(N1)` and `vector<float> B(N2)` by using the `generate()` function in the STL, where `N1 = 100` and `N2 = 50` are the sizes of these two vectors. 
+- **Data Structures:**
+  - Implements a binary tree with dynamic node allocation.
 
-The `main()` routine copies the random values from vectors `A` and `B` and inserts them in the binary trees `first` and `second`, respectively. At the end, the data values in the binary trees `first` and `second` are printed out on stdout with `LSIZE = 12` numbers in a single line.
+- **Algorithm Analysis:**
+  - Calculates the size and height of the binary tree efficiently.
 
-The source file of the driver program **binarytree.cc**, is provided. Write a `Makefile` to compile the driver program and header files. The correct output of this program can be found in file **binarytree.refout**. **NOTE:** The _refout_ assumes that a tree with **only a root is height 1**, where as others believe it is height 0, different CS professors handle this in different ways.**
+- **Testing and Debugging:**
+  - Conducts thorough testing to ensure correct functionality.
+  - Handles different scenarios with random data.
 
-**Assignment Notes:**
+- **Code Organization:**
+  - Structured code into separate header and implementation files (`btree.h`, `node.h`, `binarytree.cc`).
 
-- Include any necessary headers and add necessary global constants.
+These skills collectively showcase the ability to design, implement, and test a C++ program that effectively utilizes data structures and algorithms to solve a specific problem domain.
 
-- You are not allowed to use any I/O functions from the C library, such as scanf or printf. Instead, use the I/O functions from the C++ library, such as cin or cout.
-
-- Add documentation to the appropriate source files as discussed in your class.
-
-- Prepare your Makefile (you need to construct and add Makefile) so that the TA only needs to invoke the command make to compile your source file and produce the executable file **binarytree**. Make sure you use exactly the same file names specified here, i.e. **binarytree**, in your Makefile, otherwise your **submission will get 0 points**.
-
-When your program is ready for grading, ***commit*** and ***push*** your local repository to remote git classroom repository and follow the _**Assignment Submission Instructions**_.
